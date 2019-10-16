@@ -39,10 +39,6 @@ public class FastScanner implements IFastScanner {
         in.close();
     }
     
-    private boolean isLineSeparators(int c) {
-    	return c == '\n' || c == '\r';
-    }
-    
     public String nextLine() throws IOException {
     	StringBuilder line = new StringBuilder();
 
@@ -107,6 +103,14 @@ public class FastScanner implements IFastScanner {
             return true;
         }
         cashNext = next();
+        return cashNext != null;
+    }
+    
+    public boolean hasNextWithout(Separators whiteChar) throws IOException {
+    	if (cashNext != null) {
+            return true;
+        }
+        cashNext = nextWithout(whiteChar);
         return cashNext != null;
     }
     
