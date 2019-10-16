@@ -9,8 +9,11 @@ public class FastScanner implements IFastScanner {
     private Reader in;
     private String cashNext;
     private FastScanner lineScanner;
-    private String additionalSeparators;
-
+    private String additionalSeparators = "";
+    private final boolean LINE_R = 
+    		System.lineSeparator().length() < 2 && 
+    		System.lineSeparator().indexOf('\r') > -1;
+    
     FastScanner(String s) {
         in = new StringReader(s);
     }
@@ -35,14 +38,36 @@ public class FastScanner implements IFastScanner {
     public void close() throws IOException {
         in.close();
     }
-
     
     private boolean isLineSeparators(int c) {
     	return c == '\n' || c == '\r';
     }
     
     public String nextLine() throws IOException {
-        return nextWithout(this::isLineSeparators);
+    	StringBuilder line = new StringBuilder();
+
+        int c = in.read();
+        if (c < 0) {
+            return null;
+        }
+        while (c > 0 && c != '\n') {
+        	if (c == '\r') {
+        		if (LINE_R) {
+        			break;
+        		}
+        		int nextChar = in.read();
+        		if (nextChar == '\n') {
+        			break;
+        		}
+        		line.append(c);
+        		c = nextChar;
+        	} else {
+        		line.append((char) c);
+        		c = in.read();
+        	}
+        }
+
+        return line.toString();
     }
 
     public interface Separators {
@@ -66,7 +91,7 @@ public class FastScanner implements IFastScanner {
         }
 
         while (!whiteChar.check(c) && c > 0) {
-            str.append(c);
+            str.append((char) c);
             c = in.read();
         }
 
@@ -84,7 +109,7 @@ public class FastScanner implements IFastScanner {
         cashNext = next();
         return cashNext != null;
     }
-
+    
     public boolean hasNextInt() throws IOException {
         if (hasNext()) {
             try {
@@ -136,7 +161,7 @@ public class FastScanner implements IFastScanner {
     	}
     	return lineScanner.next();
     }
-    
+   
     public long nextLongInLine() throws IOException {
     	return lineScanner.nextLong();
     }
@@ -149,6 +174,15 @@ public class FastScanner implements IFastScanner {
 		return lineScanner.hasNext();
 	}
 
+    public boolean hasNextLine() throws IOException {
+    	String line = nextLine();
+    	if (line == null) {
+    		return false;
+    	}
+    	lineScanner = new FastScanner(line);
+    	return true;
+    }
+	
 	@Override
 	public boolean hasNextInt(int radix) throws IOException {
 		if (hasNext()) {
@@ -168,7 +202,14 @@ public class FastScanner implements IFastScanner {
 		if (!lineScannerCheck()) {
     		return false;
     	}
-		return lineScanner.hasNextInt();
+		return lineScanner.hasNextInt(radix);
+	}
+	
+	public boolean hasNextLongInLine() throws IOException {
+		if (!lineScannerCheck()) {
+    		return false;
+    	}
+		return lineScanner.hasNextLong();
 	}
 
 	@Override
