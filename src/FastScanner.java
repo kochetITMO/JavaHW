@@ -60,7 +60,7 @@ public class FastScanner implements IFastScanner {
         var str = new StringBuilder();
 
         if (cashNext != null) {
-            String ans = cashNext; // создание копии
+            String ans = cashNext;
             cashNext = null;
             return ans;
         }
