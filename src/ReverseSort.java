@@ -29,10 +29,10 @@ public class ReverseSort {
             size++;
         }
 
-        Arrays.sort(ans, 0, size, Comparator.comparingLong(o -> o[1]));
+        Arrays.parallelSort(ans, 0, size, Comparator.comparingLong(o -> o[1]));
 
         for (int i = 0; i < size; i++) {
-            Arrays.sort(ans[i], 2, (int) ans[i][0]);
+            Arrays.parallelSort(ans[i], 2, (int) ans[i][0]);
         }
 
         for (int i = size - 1; i > -1; i--) {
