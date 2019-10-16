@@ -36,20 +36,13 @@ public class FastScanner implements IFastScanner {
         in.close();
     }
 
-
+    
+    private boolean isLineSeparators(int c) {
+    	return c == '\n' || c == '\r';
+    }
+    
     public String nextLine() throws IOException {
-        StringBuilder line = new StringBuilder();
-
-        int c = in.read();
-        if (c < 0) {
-            return null;
-        }
-        while (c > 0 && c != '\n' && c != '\r') {
-            line.append(c);
-            c = in.read();
-        }
-
-        return line.toString();
+        return nextWithout(this::isLineSeparators);
     }
 
     public interface Separators {
