@@ -32,7 +32,7 @@ public class FastScanner implements IFastScanner {
     }
     
     FastScanner(InputStream stream) {
-        in = new BufferedReader(new InputStreamReader(stream));
+        in = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8));
     }
     
     public void close() throws IOException {
