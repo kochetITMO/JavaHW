@@ -20,7 +20,7 @@ public class WordStatIndex {
                         || c == '\''
         );
 	}
-	
+	//
 	static Map<String, IntList> solve(FastScanner in) throws IOException {
 		Map<String, IntList> map = new LinkedHashMap<>();
 		int count = 0;
