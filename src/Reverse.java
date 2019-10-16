@@ -24,7 +24,7 @@ public class Reverse {
     public static void main(String[] args) {
         try (
                 FastScanner in = new FastScanner(System.in);
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out))
+                Writer out = new BufferedWriter(new OutputStreamWriter(System.out))
         ) {
 
             solve(in).print(out);;

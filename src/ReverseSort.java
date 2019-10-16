@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
@@ -18,6 +19,8 @@ public class ReverseSort {
 
             solve(in, out);
 
+        } catch (FileNotFoundException e) {
+        	System.out.println("File not found: " + e.getMessage());
         } catch (IOException e) {
             System.out.println("Input/Output error: " + e.getMessage());
         }
