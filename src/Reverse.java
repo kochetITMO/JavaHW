@@ -9,13 +9,15 @@ public class Reverse {
 
 	static ReverseAns solve(FastScanner in) throws IOException {
 		var ans = new ReverseAns();
-
-		while (in.hasNextLine()) {
+		
+		String line = in.nextLine();
+		while (line != null) {
 			ans.addLine();
-
-			while (in.hasNextLongInLine()) {
-				ans.addLong(in.nextLongInLine());
+			FastScanner lineScanner = new FastScanner(line);
+			while (lineScanner.hasNext()) {
+				ans.addLong(lineScanner.nextLong());
 			}
+			line = in.nextLine();
 		}
 
 		return ans;
