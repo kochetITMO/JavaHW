@@ -5,24 +5,22 @@ import java.io.OutputStreamWriter;
 
 public class ReverseSort {
 
-    static void solve(FastScanner in, BufferedWriter out) throws IOException {
-        ReverseAns ans = Reverse.solve(in);
-        ans.sort();
-        ans.print(out);
-    }
+	static void solve(FastScanner in, BufferedWriter out) throws IOException {
+		ReverseAns ans = Reverse.solve(in);
+		ans.sort();
+		ans.print(out);
+	}
 
-    public static void main(String[] args) {
-        try (
-                FastScanner in = new FastScanner(System.in);
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out))
-        ) {
+	public static void main(String[] args) {
+		try (FastScanner in = new FastScanner(System.in);
+				BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out))) {
 
-            solve(in, out);
+			solve(in, out);
 
-        } catch (FileNotFoundException e) {
-        	System.out.println("File not found: " + e.getMessage());
-        } catch (IOException e) {
-            System.out.println("Input/Output error: " + e.getMessage());
-        }
-    }
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: " + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("Input/Output error: " + e.getMessage());
+		}
+	}
 }
