@@ -32,8 +32,8 @@ public class IntList {
 		return size;
 	}
 
-	public void print(Writer out, String sep) throws IOException {
-		for (int i = 0; i < size - 1; i++) {
+	public void print(Writer out, String sep, int start, int end) throws IOException {
+		for (int i = start; i < end - 1; i++) {
 			out.write(Integer.toString(list[i]));
 			out.write(sep);
 		}
@@ -41,6 +41,16 @@ public class IntList {
 	}
 
 	public void print(Writer out) throws IOException {
-		print(out, " ");
+		print(out, " ", 0, size);
+	}
+	
+	interface Foreach {
+		void foo(int x);
+	}
+	
+	public void forEach(Foreach f) {
+		for (int i = 0; i < size; i++) {
+			f.foo(list[i]);
+		}
 	}
 }
